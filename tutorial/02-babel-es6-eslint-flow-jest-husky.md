@@ -21,7 +21,7 @@ console.log(`Hello ${str}`)
 
 Babel CLI 工具自带[两个命令](https://babeljs.io/docs/usage/cli/)：`babel` 能将ES6文件编译成ES5文件（译者注：需要指定 `--out-file` 参数才会有新文件产出)，而 `babel-node` 提供一个支持ES6的REPL环境，而且可以直接运行ES6代码。`babel-node` 不适合生产模式，仅用于开发测试。在本章中，我们将使用`babel-node`来设置开发环境，在下一章中我们将使用`babel`来生成ES5文件。
 
-- 接下来打开 `package.json` 文件，在 `start` 脚本里，
+- 接下来打开 `package.json` 文件，在 `start` 脚本里，把 `node .` 替换成 `babel-node src`
 - In `package.json`, in your `start` script, replace `node .` by `babel-node src` (`index.js` is the default file Node looks for, which is why we can omit `index.js`).
 
 
@@ -81,15 +81,15 @@ console.log(toby.bark())
 
 ### ES6模块语法
 
-Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog'`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax). It is currently not natively supported by NodeJS, so this is your proof that Babel processes those ES6 files correctly.
+现在试试将 `const Dog = require('./dog')` 替换成 `import Dog from './dog'`，这是新的 ES6 模块语法（而不是"CommonJS"模块语法）。目前NodeJS还不支持ES6模块，Babel插件正好能帮我们进行转换。
 
-In `dog.js`, we also replace `module.exports = Dog` by `export default Dog`
+在文件 `dog.js`，顺便也将 `module.exports = Dog` 替换成 `export default Dog`。
 
-🏁 `yarn start` should still print "Wah wah, I am Toby".
+🏁 再次运行 `yarn start`，你看到的还是 "Wah wah, I am Toby"。
 
 ## ESLint
 
-> 💡 **[ESLint](http://eslint.org)** is the linter of choice for ES6 code. A linter gives you recommendations about code formatting, which enforces style consistency in your code, and code you share with your team. It's also a great way to learn about JavaScript by making mistakes that ESLint will catch.
+> 💡 **[ESLint](http://eslint.org)** 是语法检查工具。它能帮助团队统一代码风格和避免低级错误。这也是学习JavaScript过程中用于纠正错误非常好的途径。
 
 ESLint works with *rules*, and there are [many of them](http://eslint.org/docs/rules/). Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well.
 
@@ -99,11 +99,11 @@ Check out Airbnb's most recent [instructions](https://www.npmjs.com/package/esli
 npm info eslint-config-airbnb@latest peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs yarn add --dev eslint-config-airbnb@latest
 ```
 
-It should install everything you need and add `eslint-config-airbnb`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, and `eslint-plugin-react` to your `package.json` file automatically.
+上面命令将安装依赖 `eslint-config-airbnb`，`eslint-plugin-import`，`eslint-plugin-jsx-a11y`，`eslint-plugin-react` 并保存至 `package.json` 里。
 
-**Note**: I've replaced `npm install` by `yarn add` in this command. Also, this won't work on Windows, so take a look at the `package.json` file of this repository and just install all the ESLint-related dependencies manually using `yarn add --dev packagename@^#.#.#` with `#.#.#` being the versions given in `package.json` for each package.
+**Note**: `npm install` 替换成 `yarn add` 后，在 Windows 环境里，不能完整的安装依赖，这时你需要手动进行安装每个依赖 `yarn add --dev packagename@^#.#.#`。
 
-- Create an `.eslintrc.json` file at the root of your project, just like we did for Babel, and write the following to it:
+- 创建文件 `.eslintrc.json`, 输入:
 
 ```json
 {
@@ -113,9 +113,9 @@ It should install everything you need and add `eslint-config-airbnb`, `eslint-pl
 
 We'll create an NPM/Yarn script to run ESLint. Let's install the `eslint` package to be able to use the `eslint` CLI:
 
-- Run `yarn add --dev eslint`
+- 运行 `yarn add --dev eslint`
 
-Update the `scripts` of your `package.json` to include a new `test` task:
+在 `package.json` 里的 `scripts` 项添加新的 `test` 任务：
 
 ```json
 "scripts": {
@@ -124,11 +124,11 @@ Update the `scripts` of your `package.json` to include a new `test` task:
 },
 ```
 
-Here we just tell ESLint that want to lint all JavaScript files under the `src` folder.
+这个任务将对 `src` 目录下的 JavaScript 文件进行语法检测（linter)。
 
-We will use this standard `test` task to run a chain of all the commands that validate our code, whether it's linting, type checking, or unit testing.
+标准的 `test` 任务包含链式代码验证，比如语法检测、类型检查、单元测试等。
 
-- Run `yarn test`, and you should see a whole bunch of errors for missing semicolons, and a warning for using `console.log()` in `index.js`. Add `/* eslint-disable no-console */` at the top of our `index.js` file to allow the use of `console` in this file.
+- 运行 `yarn test` 后，你将看到一大堆错误缺少分号提示，和一些 `console.log()` 使用警告。你在使用 `console` 那行添加 `/* eslint-disable no-console */` 后，ESlint 将会忽略此警告。
 
 **Note**: If you're on Windows, make sure you configure your editor and Git to use Unix LF line endings and not Windows CRLF. If your project is only used in Windows environments, you can add `"linebreak-style": [2, "windows"]` in ESLint's `rules` array (see the example below) to enforce CRLF instead.
 
