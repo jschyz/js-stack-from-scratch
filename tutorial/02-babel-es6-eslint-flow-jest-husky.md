@@ -1,27 +1,29 @@
 # 02 - Babel, ES6, ESLint, Flow, Jest, and Husky
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/02-babel-es6-eslint-flow-jest-husky).
+本章代码 [here](https://github.com/verekia/js-stack-walkthrough/tree/master/02-babel-es6-eslint-flow-jest-husky).
 
-We're now going to use some ES6 syntax, which is a great improvement over the "old" ES5 syntax. All browsers and JS environments understand ES5 well, but not ES6. That's where a tool called Babel comes to the rescue!
+现在开始将使用一些ES6语法，这是相对于ES5语法来说是一个很大的改进。但目前所有浏览器和JS环境都支持ES5，这时我们需要使用 Babel 来帮助我们转换成 ES5 代码！
 
 ## Babel
 
-> 💡 **[Babel](https://babeljs.io/)** is a compiler that transforms ES6 code (and other things like React's JSX syntax) into ES5 code. It is very modular and can be used in tons of different [environments](https://babeljs.io/docs/setup/). It is by far the preferred ES5 compiler of the React community.
+> 💡 **[Babel](https://babeljs.io/)** 是一个将ES6代码转换为ES5代码的编译器。它符合模块化规范并能在不同的[开发环境](https://babeljs.io/docs/setup/)使用。而且是React社区的首选ES5编译器。
 
-- Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. Remove the previous `color`-related code in `index.js`, and replace it with a simple:
+- 打开 `src` 目录下的 `index.js` 文件，这是你书写ES6代码的地方。删除 `index.js` 文件中前面的 `color` 相关代码，并用一个简单的代替：
 
 ```js
 const str = 'ES6'
 console.log(`Hello ${str}`)
 ```
 
-We're using a *template string* here, which is an ES6 feature that lets us inject variables directly inside the string without concatenation using `${}`. Note that template strings are created using **backquotes**.
+这里使用了ES6特性之一的*模板字符串*，可以字符串中使用插入变量 (${})，请注意，使用反引号创建模板字符串。
 
-- Run `yarn add --dev babel-cli` to install the CLI interface for Babel.
+- 在控制台界面输入 `yarn add --dev babel-cli` 命令来安装 Babel.
 
-Babel CLI comes with [two executables](https://babeljs.io/docs/usage/cli/): `babel`, which compiles ES6 files into new ES5 files, and `babel-node`, which you can use to replace your call to the `node` binary and execute ES6 files directly on the fly. `babel-node` is great for development but it is heavy and not meant for production. In this chapter we are going to use `babel-node` to set up the development environment, and in the next one we'll use `babel` to build ES5 files for production.
+Babel CLI 工具自带[两个命令](https://babeljs.io/docs/usage/cli/)：`babel` 能将ES6文件编译成ES5文件（译者注：需要指定 `--out-file` 参数才会有新文件产出)，而 `babel-node` 提供一个支持ES6的REPL环境，而且可以直接运行ES6代码。`babel-node` 不适合生产模式，仅用于开发测试。在本章中，我们将使用`babel-node`来设置开发环境，在下一章中我们将使用`babel`来生成ES5文件。
 
+- 接下来打开 `package.json` 文件，在 `start` 脚本里，
 - In `package.json`, in your `start` script, replace `node .` by `babel-node src` (`index.js` is the default file Node looks for, which is why we can omit `index.js`).
+
 
 If you try to run `yarn start` now, it should print the correct output, but Babel is not actually doing anything. That's because we didn't give it any information about which transformations we want to apply. The only reason it prints the right output is because Node natively understands ES6 without Babel's help. Some browsers or older versions of Node would not be so successful though!
 
@@ -41,11 +43,11 @@ If you try to run `yarn start` now, it should print the correct output, but Babe
 
 ## ES6
 
-> 💡 **[ES6](http://es6-features.org/)**: The most significant improvement of the JavaScript language. There are too many ES6 features to list them here but typical ES6 code uses classes with `class`, `const` and `let`, template strings, and arrow functions (`(text) => { console.log(text) }`).
+> 💡 **[ES6](http://es6-features.org/)**: 这是JavaScript语言最显着的改进。ES6 有很多新特性，例如：`class`，`const`，`let`，模板字符串，箭头函数(`(text) => { console.log(text) }`)。
 
-### Creating an ES6 class
+### 创建一个类
 
-- Create a new file, `src/dog.js`, containing the following ES6 class:
+- 创建一个新文件叫`src/dog.js`，内容如下：
 
 ```js
 class Dog {
@@ -61,9 +63,9 @@ class Dog {
 module.exports = Dog
 ```
 
-It should not look surprising to you if you've done OOP in the past in any language. It's relatively recent for JavaScript though. The class is exposed to the outside world via the `module.exports` assignment.
+如果你有OOP (面向对象) 开发经验，那么你应该不会觉得奇怪。它是通过 `module.exports` 赋值暴露给外界。
 
-In `src/index.js`, write the following:
+接着我们在 `src/index.js` 里输入：
 
 ```js
 const Dog = require('./dog')
@@ -73,11 +75,11 @@ const toby = new Dog('Toby')
 console.log(toby.bark())
 ```
 
-As you can see, unlike the community-made package `color` that we used before, when we require one of our files, we use `./` in the `require()`.
+需要注意的是，我们引用自建模块时，需要加上相对路劲 `./`。
 
-🏁 Run `yarn start` and it should print "Wah wah, I am Toby".
+🏁 现在运行 `yarn start`，你将会看到 "Wah wah, I am Toby"。
 
-### The ES6 modules syntax
+### ES6模块语法
 
 Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog'`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax). It is currently not natively supported by NodeJS, so this is your proof that Babel processes those ES6 files correctly.
 
