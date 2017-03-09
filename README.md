@@ -20,19 +20,19 @@
 
 > 🎉 **这是自2016年以来更新的第二版，请看[更新日志](/CHANGELOG.md)!**
 
-This is a straight-to-the-point guide to assembling a JavaScript stack. It requires some general programming knowledge, and JavaScript basics. **It focuses on wiring tools together** and giving you the **simplest possible example** for each tool. You can see this tutorial as *a way to write your own boilerplate from scratch*. Since the goal of this tutorial is to assemble various tools, I do not go into details about how these tools work individually. Refer to their documentation or find other tutorials if you want to acquire deeper knowledge in them.
+这是一个直观的JavaScript技术栈构建指南，前提需要知道一些普遍的编程语言以及JavaScript基础。它集中于将工具结合一起，并为每个工具提供一些最简单的可能性例子。你可以把它作为从零开始编写代码样板的方法。由于本教程的目标是结合各种工具，因此没有详细介绍这些工具如何独立工作。如果你想获取更深入的了解，请参考他们本身文档或者阅读其他教程。
 
-You don't need to use this entire stack if you build a simple web page with a few JS interactions of course (a combination of Browserify/Webpack + Babel + jQuery is enough to be able to write ES6 code in different files), but if you want to build a web app that scales, and need help setting things up, this tutorial will work great for you.
+倘若搭建一个简单的js交互网页（组合Browserify / Webpack + Babel + jQuery足以能够在不同的文件中编写ES6代码），你当然不需要完整的技术栈。但如果搭建一定规模的web app，并需要配置，本教程会对你非常有益。
 
-A big chunk of the stack described in this tutorial uses React. If you are beginning and just want to learn React, [create-react-app](https://github.com/facebookincubator/create-react-app) will get you up and running with a React environment very quickly with a pre-made configuration. I would for instance recommend this approach to someone who arrives in a team that's using React and needs to catch up with a learning playground. In this tutorial you won't use a pre-made configuration, because I want you to understand everything that's happening under the hood.
+本教程提到的大部分技术栈都用到React。如果你正开始或想学React， [create-react-app](https://github.com/facebookincubator/create-react-app) 可以让你快速搭建并运行React环境，所有环境都配置好了。如果你刚加入使用React的团队并快速上手，[create-react-app](https://github.com/facebookincubator/create-react-app)会很适合你。而在这份指南里，不会有预置好的结构，因为我想要你理解配置背后发生的事。
 
-Code examples are available for each chapter, and you can run them all with `yarn && yarn start`. I recommend writing everything from scratch yourself by following the **step-by-step instructions** though.
+每章都会有代码示例，你可以使用`yarn && yarn start`来运行它们.我建议你**一步一步**跟随指导从零开始.
 
-Final code available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate), and in the [releases](https://github.com/verekia/js-stack-from-scratch/releases). There is a [live demo](https://js-stack.herokuapp.com/) too.
+在[JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate)和[releases](https://github.com/verekia/js-stack-from-scratch/releases)里有最终的代码。 这里也有 [在线 演示](https://js-stack.herokuapp.com/)。
 
-Works on Linux, macOS, and Windows.
+可运行在Linux, macOS, 或者 Windows环境。
 
-## Table of contents
+## 目录
 
 [01 - Node, Yarn, `package.json`](/tutorial/01-node-yarn-package-json.md#readme)
 
@@ -52,19 +52,13 @@ Works on Linux, macOS, and Windows.
 
 [09 - Travis, Coveralls, Heroku](/tutorial/09-travis-coveralls-heroku.md#readme)
 
-## Coming up next
+## 接下来
 
-Setting up your editor (Atom first), MongoDB, Progressive Web App.
-
-## Translations
-
-If you want to add your translation, please read the [translation recommendations](/how-to-translate.md) to get started!
+设置您的编辑器（Atom优先）, MongoDB, Progressive Web App.
 
 ### V2
 
-Your link here soon ;)
-
-Check out the [ongoing translations](https://github.com/verekia/js-stack-from-scratch/issues/147).
+正在进行中……
 
 ### V1
 
@@ -74,7 +68,7 @@ Check out the [ongoing translations](https://github.com/verekia/js-stack-from-sc
 - [Русский](https://github.com/UsulPro/js-stack-from-scratch) by [React Theming](https://github.com/sm-react/react-theming)
 - [ไทย](https://github.com/MicroBenz/js-stack-from-scratch) by [MicroBenz](https://github.com/MicroBenz)
 
-## Credits
+## 鸣谢
 
 Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
 
